@@ -1,0 +1,86 @@
+swagger: '2.0'
+info:
+  title: healthcheck-v5c
+  x-ibm-name: healthcheck-v5c
+  version: 1.0.0
+x-ibm-configuration:
+  cors:
+    enabled: true
+  gateway: datapower-gateway
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  assembly:
+    execute:
+      - gatewayscript:
+          version: 1.0.0
+          title: gatewayscript
+          source: |-
+            var apim = require('./apim.custom.js');
+            var vAPIName = apim.getvariable('api.name');
+            session.output.write('{"You_invoked_API": ' + vAPIName + '"}');
+            apim.output('application/json');
+    finally: []
+  properties:
+    target-url:
+      value: http://example.com/operation-name
+      description: The URL of the target service
+      encoded: false
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+basePath: /healthcheck-v5c
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    put:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    post:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    delete:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    head:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    patch:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+schemes:
+  - https
